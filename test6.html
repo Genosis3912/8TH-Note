@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: gray;
+        }
+        #bg1{
+            height: 100%;
+            width: 0px;
+            top: 0;
+            left: 0;
+            z-index: 0px;
+            position: fixed;
+            padding-top: 10px;
+            overflow-x: hidden;
+            background-color: green;
+            transition: 0.4s;
+        }
+        #bg2{
+            height: 100%;
+            width: 0px;
+            top: 0;
+            left: 0;
+            z-index: 0px;
+            position: fixed;
+            padding-top: 10px;
+            overflow-x: hidden;
+            background-color: blue;
+            transition: 0.7s;
+        }
+        .slideNav{
+            height: 100%;
+            width: 0px;
+            background-color: black;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            position: fixed;
+            padding-top: 60px;
+            overflow-x: hidden;
+            transition: 0.9s;
+        }
+        .slideNav a:hover {
+            background-color: #f1f1f1;
+          }
+          .slideNav a{
+            text-decoration: none;
+            font-size: 30px;
+            display: block;
+            padding: 8px 8px 8px 20px;
+            text-align: center;
+        }
+
+        .slideNav #lnk{
+            text-decoration: none;
+            font-size: 30px;
+            display: block;
+            padding: 8px 8px 8px 20px;
+            text-align: center;
+            border-style:groove;
+            border-color: antiquewhite;
+        }
+
+        .slideNav .closeBtn{
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 0px; 
+        }
+        .main {
+            transition: margin-left .5s;
+            padding: 20px;
+          }
+    </style>
+</head>
+<body>
+    <div id="bg1"></div>
+    <div id="bg2"></div>
+    <div class="slideNav" id="slider">
+        <a href="#" onclick="closeNav()" class="closeBtn">&times;</a>
+        <a href="#" id="lnk">Home</a>
+        <a href="#" id="lnk">Library</a>
+        <a href="#" id="lnk">About</a>
+        <a href="#" id="lnk">contact</a>
+    </div>
+    <span onclick="openNav()">Open</span>
+    <div class="main">
+        aaaaaa
+    </div>
+    <script>
+        function openNav(){
+        document.getElementById("bg1").style.width= "300px";
+        document.getElementById("bg2").style.width= "275px";
+        document.getElementById("slider").style.width= "250px";
+        }
+        function closeNav(){
+            document.getElementById("bg1").style.width= "0px";
+        document.getElementById("bg2").style.width= "0px";
+            document.getElementById("slider").style.width = "0";
+        }
+    </script>
+</body>
+</html>

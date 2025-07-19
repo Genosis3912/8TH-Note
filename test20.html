@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <style>
+        *{
+            text-decoration: none;
+        }
+        
+        /*navigation bar*/
+        .navbar {
+            background: burlywood;
+            padding: 15px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        
+        .navdiv{
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /*Logo & Name*/
+        .template{
+            font-size: 35px;
+            font-weight: bold;
+        }
+        
+        .template a{
+            color: aliceblue;
+        }
+        
+        ul{
+            text-align: left;
+        }
+        
+        li{
+            display: inline-block;
+        }
+        
+        li a{
+            color: aliceblue;
+            font-size: 18px;
+            margin-right: 25px;
+        }
+        /*button with the class login*/
+        .login{
+            background-color:black;
+            border-radius: 10px;
+            padding: 10px;
+            width: 90px;
+        }
+        /*button with the class login*/
+        .login a{
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        a:hover{
+            color: brown;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <nav class="navbar">
+                <div class="navdiv">
+                    <div class="template"><a href="#">Template</a></div>
+                    <ul>
+                        <li> <a href="#">Home</a></li>
+                        <li> <a href="about.html">About</a></li>
+                        <li> <a href="#">Contact</a></li>
+                        <li><a href="#">Help</a></li> <input type="text" placeholder="search"> <button type="submit"
+                            class="login"><a href="#">Sign in</a></button> <button type="submit" class="login"><a
+                                href="#">Sign up</a></button>

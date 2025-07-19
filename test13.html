@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/9156a611df.js" crossorigin="anonymous"></script>
+
+    <style>
+        #audio-player {
+            width: 100%;
+          }
+          
+          #audio-controls {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+          
+          .control-button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 2rem;
+            margin: 0 0.5rem;
+            padding: 0.5rem;
+          }
+          
+          #progress-bar {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background-color: #150669;
+            z-index: 1;
+            color: black;
+          }
+    
+          #volume-container {
+            position: relative;
+          }
+          
+          #volume-control {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            margin: 0;
+          }
+          .audio-player {
+  width: 100%;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.song-info {
+  margin-bottom: 20px;
+}
+
+.song-info h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.song-info p {
+  font-size: 18px;
+  color: #666;
+}
+
+#audio-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.control-button {
+  background: white;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  margin: 0 10px;
+  padding: 10px;
+}
+
+#progress-bar {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background-color: #150669;
+  z-index: 1;
+  color: black;
+}
+
+#volume-container {
+  position: relative;
+}
+
+#volume-control {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin: 0;
+}
+          
+    </style>
+</head>
+<body>
+    <div id="audio-player">
+        <!-- Audio element -->
+        <audio src="/songs/1.mp3" id="my-audio"></audio>
+      
+        <!-- Custom controls -->
+        <div id="audio-controls">
+            <button id="play-pause-button" class="control-button">
+                <i id="play-pause-icon" class="fas fa-play"></i>
+              </button>
+          <input type="range" id="progress-bar" value="0">
+          <div id="volume-container">
+            <button id="volume-button" class="control-button">
+              <i class="fas fa-volume-up"></i>
+            </button>
+            <input type="range" id="volume-control" min="0" max="1" step="0.1" value="1">
+          </div>
+          <button id="download-button" class="control-button">
+            <i class="fas fa-download"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="audio-player">
+        <div class="song-info">
+          <h1 id="song-name">Song Name</h1>
+          <p>Play count: 0</p>
+        </div>
+        <audio id="my-audio" src="" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <div id="audio-controls">
+          <button id="play-pause-button" class="control-button">
+            <i id="play-pause-icon" class="fas fa-play"></i>
+          </button>
+          <input type="range" id="progress-bar" value="0">
+          <div id="volume-container">
+            <button id="volume-button" class="control-button">
+              <i class="fas fa-volume-up"></i>
+            </button>
+            <input type="range" id="volume-control" min="0" max="1" step="0.1" value="1">
+          </div>
+          <button id="download-button" class="control-button">
+            <i class="fas fa-download"></i>
+          </button>
+        </div>
+      </div>
+      <script>
+        const audio = document.querySelector('#my-audio');
+const playPauseButton = document.querySelector('#play-pause-button');
+const playPauseIcon = document.querySelector('#play-pause-icon');
+const progressBar = document.querySelector('#progress-bar');
+const volumeContainer = document.querySelector('#volume-container');
+const volumeButton = document.querySelector('#volume-button');
+const volumeControl = document.querySelector('#volume-control');
+
+playPauseButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    playPauseIcon.className = 'fas fa-pause';
+  } else {
+    audio.pause();
+    playPauseIcon.className = 'fas fa-play';
+  }
+});
+
+audio.addEventListener('timeupdate', () => {
+  const progress = (audio.currentTime / audio.duration) * 100;
+  progressBar.value = progress;
+});
+
+progressBar.addEventListener('input', () => {
+  const progress = progressBar.value / 100;
+  audio.currentTime = progress * audio.duration;
+});
+
+volumeButton.addEventListener('click', () => {
+  volumeControl.style.display = volumeControl.style.display === 'none'? 'block' : 'none';
+});
+
+volumeControl.addEventListener('input', () => {
+  audio.volume = volumeControl.value;
+});
+      </script>
+      <script>
+        const audio = document.getElementById('my-audio');
+const playPauseButton = document.getElementById('play-pause-button');
+const playPauseIcon = document.getElementById('play-pause-icon');
+const progressBar = document.getElementById('progress-bar');
+const volumeContainer = document.getElementById('volume-container');
+const volumeButton = document.getElementById('volume-button');
+const volumeControl = document.getElementById('volume-control');
+
+playPauseButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    playPauseIcon.className = 'fas fa-pause';
+  } else {
+    audio.pause();
+    playPauseIcon.className = 'fas fa-play';
+  }
+});
+
+audio.addEventListener('timeupdate', () => {
+  const progress = (audio.currentTime / audio.duration) * 100;
+  progressBar.value = progress;
+});
+
+progressBar.addEventListener('input', () => {
+  const progress = progressBar.value / 100;
+  audio.currentTime = progress * audio.duration;
+});
+
+volumeButton.addEventListener('click', () => {
+  volumeControl.style.display = volumeControl.style.display === 'none' ? 'block' : 'none';
+});
+
+volumeControl.addEventListener('input', () => {
+  audio.volume = volumeControl.value;
+});
+      </script>
+</body>
+</html>

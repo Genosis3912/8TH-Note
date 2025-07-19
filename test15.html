@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .song-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+        
+          /* Add some basic styling to the song cover */
+          .song-cover {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+          }
+        
+          .song-cover img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+          }
+        
+          /* Add some basic styling to the song info */
+          .song-info {
+            margin-bottom: 10px;
+          }
+        
+          .song-info h2 {
+            font-size: 16px;
+            margin-bottom: 5px;
+          }
+        
+          .song-info p {
+            font-size: 14px;
+            color: #666;
+          }
+        
+          /* Add some basic styling to the song player */
+          .song-player {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+          }
+        
+          .play-button, .pause-button, .stop-button {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+          }
+        
+          .play-button:hover, .pause-button:hover, .stop-button:hover {
+            background-color: #3e8e41;
+          }
+    </style>
+</head>
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="song-container">
+              <div class="song-cover">
+                <img src="song1-cover.jpg" alt="Song 1 Cover">
+              </div>
+              <div class="song-info">
+                <h2>Song 1</h2>
+                <p>Artist 1</p>
+              </div>
+              <div class="song-player">
+                <button class="play-button">Play</button>
+                <button class="pause-button">Pause</button>
+                <button class="stop-button">Stop</button>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="song-container">
+              <div class="song-cover">
+                <img src="song2-cover.jpg" alt="Song 2 Cover">
+              </div>
+              <div class="song-info">
+                <h2>Song 2</h2>
+                <p>Artist 2</p>
+              </div>
+              <div class="song-player">
+                <button class="play-button">Play</button>
+                <button class="pause-button">Pause</button>
+                <button class="stop-button">Stop</button>
+              </div>
+            </div>
+          </div>
+          <!-- Repeat for 6 more songs -->
+          <div class="swiper-slide">
+            <div class="song-container">
+              <div class="song-cover">
+                <img src="song8-cover.jpg" alt="Song 8 Cover">
+              </div>
+              <div class="song-info">
+                <h2>Song 8</h2>
+                <p>Artist 8</p>
+              </div>
+              <div class="song-player">
+                <button class="play-button">Play</button>
+                <button class="pause-button">Pause</button>
+                <button class="stop-button">Stop</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Add navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+      <script>
+        // Initialize Swiper
+        var swiper = new Swiper('.swiper-container', {
+          slidesPerView: 3,
+          spaceBetween: 30,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      </script>
+</body>
+</html>

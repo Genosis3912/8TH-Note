@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Player</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #d8c484;
+        }
+        .player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background-color: #df7016;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        audio {
+            width: 100%;
+        }
+        .song-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        #audio-player {
+            height: 50px;
+            width: 500px;
+            overflow: hidden;
+            background-color: #2B2B2B;
+            color: white;
+        }
+        
+        #controls {
+            height: 50px;
+            background-color: #808080;
+            width: 350px;
+        }
+        
+        .time {
+            font-size: 10px;
+            color: white;
+            position: relative;
+            top: 14px;
+            margin: 5px;
+        }
+        
+        .ui-progressbar {
+            background: #2B2B2B;
+        }
+        
+        .ui-progressbar-value {
+            background: white;
+        }
+        
+        #progressbar, #volume {
+            height: 10px;
+            display: inline-block;
+            border-radius: 0px;
+            border: none;
+            position: relative;
+            top: 16px;
+        }
+        
+        #progressbar {
+            width: 150px;
+        }
+        
+        #play, #mute {
+            font-size: 16px;
+            width: 20px;
+            position: relative;
+            top: 17px;
+        }
+        
+        #play {
+            margin-left: 15px;
+        }
+        
+        #volume {
+            width: 50px;
+        }
+        
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+</head>
+<body>
+    <div class="player" style="width:50%;">
+        <div class="song-info">
+            <h2 id="song-name">Song Name</h2>
+            <div id="song-time">00:00 / 00:00</div>
+            
+        </div>
+        <audio id="player">
+            <source src="http://www.noiseaddicts.com/samples_1w72b820/2543.mp3" type="audio/mpeg" />
+          </audio>
+        <div id="audio-player">
+            <div id="controls">
+                <i id="play" class="fa fa-pause"></i>
+                <span id="start-time" class="time">00:00</span>
+                <div id="progressbar"></div>
+                <span id="time" class="time">00:00</span>
+                <i id="mute" class="fa fa-volume-up"></i>
+                <div id="volume"></div>    
+            </div>
+        </div>
+    </div>
+    <script>
+        var audio_player = $("#audio-player");
+        var play_button = $('#play');
+        var progress_bar = $("#progressbar");
+        var time = $("#time");
+        var mute_button = $('#mute');
+        var volume_bar = $('#volume');
+        var more_info = $('#more-info-box');
+        var info_tray = $("#info-tray");
+        var player = document.getElementById('player');
+        var duration = 0;
+        var volume = 0.75;
+        
+        player.onloadedmetadata = function() {
+            duration = player.duration;
+            progress_bar.progressbar("option", { 'max' : duration });
+        };
+        
+        player.load();
+        player.volume = 0.75;
+        player.addEventListener("timeupdate", function() {
+            progress_bar.progressbar('value', player.currentTime);
+            time.text(getTime(player.currentTime));
+        }, false);
+        
+        function getTime(t) {
+            var m=~~(t/60), s=~~(t % 60);
+            return (m<10?"0"+m:m)+':'+(s<10?"0"+s:s);
+        }
+        
+        function getProgressBarClickInfo(progress_bar, e) {
+            var offset = progress_bar.position();
+            var x = e.pageX - offset.left; // or e.offsetX (less support, though)
+            var y = e.pageY - offset.top;  // or e.offsetY
+            var max = progress_bar.progressbar("option", "max");
+            var value = x * max / progress_bar.width();
+        
+            return { x: x, y: y, max: max, value: value };
+        }
+        
+        volume_bar.progressbar({
+            value : player.volume*100,
+        });
+        
+        volume_bar.click(function(e) {
+            var info = getProgressBarClickInfo($(this), e);
+            volume_bar.progressbar('value', info.value);
+            player.volume = info.value / info.max;
+        });
+        
+        progress_bar.progressbar({
+            value : player.currentTime,
+        });
+        
+        progress_bar.click(function(e) {
+            var info = getProgressBarClickInfo($(this), e);
+            player.currentTime = player.duration / info.max * info.value;
+        });
+        
+        play_button.click(function() {
+            player[player.paused ? 'play' : 'pause']();
+            $(this).toggleClass("fa-play", !player.paused);
+            $(this).toggleClass("fa-pause", player.paused);
+        });
+        
+        mute_button.click(function() {
+            if (player.volume == 0) {
+                player.volume = volume;
+            } else {
+                volume = player.volume;
+                player.volume = 0;
+            }
+        
+            volume_bar.progressbar('value', player.volume * 100);
+        
+            $(this).toggleClass("fa-volume-up", player.volume != 0);
+            $(this).toggleClass("fa-volume-off", player.volume == 0);
+        });
+        
+        more_info.click(function() {
+            audio_player.animate({
+                height: (audio_player.height() == 50) ? 100 : 50
+            }, 1000);
+        });
+        
+            
+    </script>
+</body>
+</html>
